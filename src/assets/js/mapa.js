@@ -5,7 +5,7 @@ var baseLayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 baseLayer.addTo(map);
 baseLayer.on('load',loadGeoJSon);
 // Initialise the FeatureGroup to store editable layers
-L.control.locate().addTo(map);//boton para geolocalizacion
+//L.control.locate().addTo(map);//boton para geolocalizacion
 var drawnItems = new L.FeatureGroup();
 map.addLayer(drawnItems);
 // Initialise the draw control and pass it the FeatureGroup of editable layers
@@ -130,16 +130,16 @@ var punto={
 
 
 
-function x(){
+function localizar(){
   //esto permite geolocalizarse (apiREST)
-  map.on('click', function(e){
+
     map.locate({setView:true,zoom:4,enableHighAccuracy:true});
-  });
+
   function onLocationFound(e) {
     var mkii = L.icon.mapkey({icon:"school",color:'#725139',background:'#f2c357',size:40});
     var radius = e.accuracy / 2;
     L.marker(e.latlng,{icon:mkii}).addTo(map).bindPopup("<h5>Si tu ubicación esta bien presiona sobre el circulo</h5>").openPopup();
-    var radio=L.circle(e.latlng,radius);
+    var radio=L.circle(e.latlng,radius,{color:'green'});
     radio.addTo(map);
     radio.on('click',function(e){
       $('#modalCliente').modal('show');
