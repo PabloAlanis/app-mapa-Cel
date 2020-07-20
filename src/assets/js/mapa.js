@@ -10,18 +10,39 @@ function localizar(){
   map.locate({setView:true,zoom:4,enableHighAccuracy:true});
 
   function onLocationFound(e) {
+    $('#botonLocalizar').attr("disabled", true); //deshabilito boton localizar
+    Swal.fire({
+    position: 'top-end',
+    customClass:'swalModal',//busca en css
+    icon: 'success',
+    backdrop:false,
+    title: 'Hola, si es correcta la ubicacion presiona el circulo verde',
+    showConfirmButton: false,
+    timer: 3000
+    })
     var mkii = L.icon.mapkey({icon:"school",color:'#725139',background:'#f2c357',size:40});
     var radius = e.accuracy / 2;
-    L.marker(e.latlng,{icon:mkii}).addTo(map).bindPopup("<h5>Si tu ubicación esta bien presiona sobre el circulo</h5>").openPopup();
+    L.marker(e.latlng,{icon:mkii}).addTo(map).bindPopup("<h5>Si tu ubicación esta bien presiona sobre el circulo, si no presiona afuera</h5>").openPopup();
     var radio=L.circle(e.latlng,radius,{color:'green'});
     radio.addTo(map);
     radio.on('click',function(e){
       $('#modalCliente').modal('show');
     });
+    map.on('click',function(e){
+      //
+    });
   }
 
    function onLocationError(e) {
-     alert("Debes autorizar la geolocalización");
+     Swal.fire({
+     position: 'top-end',
+     customClass:'swalModal',//busca en css
+     icon: 'error',
+     backdrop:false,
+     title: 'Tenes que activar la localización',
+     showConfirmButton: false,
+     timer: 3000
+     })
     }
    map.on('locationfound',onLocationFound);
    map.on('locationerror',onLocationError);
