@@ -14,7 +14,7 @@ var drawControl = new L.Control.Draw({
     featureGroup: drawnItems,
   }
 });
-map.addControl(drawControl);
+//map.addControl(drawControl);
 //
 
 //evento de agregar algo al mapa
