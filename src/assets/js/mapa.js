@@ -38,11 +38,11 @@ map.on(L.Draw.Event.CREATED, function (e) {
 map.on('click', function(e) {
 //$('#modalPunto').modal('show');
 //$('.modalPunto-body').html(datos);
-Swal.fire(
+/*Swal.fire(
   'Good job!',
   'You clicked the button!',
   'success'
-)
+)*/
 //$('.modal-body').html(layer.getLatLng().toString());
   //L.marker(e.latlng).addTo(map);
   //alert(e.latlng);
@@ -130,7 +130,29 @@ var punto={
 
 
 
+function x(){
+  //esto permite geolocalizarse (apiREST)
+  map.on('click', function(e){
+    map.locate({setView:true,zoom:4,enableHighAccuracy:true});
+  });
+  function onLocationFound(e) {
+    var mkii = L.icon.mapkey({icon:"school",color:'#725139',background:'#f2c357',size:40});
+    var radius = e.accuracy / 2;
+    L.marker(e.latlng,{icon:mkii}).addTo(map).bindPopup("<h5>Si tu ubicación esta bien presiona sobre el circulo</h5>").openPopup();
+    var radio=L.circle(e.latlng,radius);
+    radio.addTo(map);
+    radio.on('click',function(e){
+      $('#modalCliente').modal('show');
+    });
+  }
 
+   function onLocationError(e) {
+     alert("Debes autorizar la geolocalización");
+    }
+   map.on('locationfound',onLocationFound);
+   map.on('locationerror',onLocationError);
+   //esto permite geolocalizarse (apiREST)
+}
 //carga de geoJSON
 function loadGeoJSon(){
 

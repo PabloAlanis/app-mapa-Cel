@@ -6,3 +6,11 @@ html, body, #map {
     height: 100%;
     width: 100vw;
 }
+#botones {
+  position: absolute;
+  bottom: 10px ;
+  width: 100%;
+  text-align:center;
+  padding: 10px;
+  z-index: 400;
+}
