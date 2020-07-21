@@ -7,6 +7,7 @@ html, body, #map {
     width: 100vw;
 }
 #botonesMapa {
+  font-family: arial;
   position: absolute;
   bottom: 10px ;
   width: 100%;
@@ -15,5 +16,7 @@ html, body, #map {
   z-index: 400;
 }
 .swalModal{
-  width:50% !important;
+  width:40% ;
+  z-index:10000 !important;
+  
 }

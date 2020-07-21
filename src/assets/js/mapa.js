@@ -7,7 +7,7 @@ baseLayer.addTo(map);
 
 function localizar(){
   //esto permite geolocalizarse (apiREST)
-  map.locate({setView:true,zoom:4,enableHighAccuracy:true});
+  map.locate({setView:true,maxZoom:17,enableHighAccuracy:true});
 
   function onLocationFound(e) {
     $('#botonLocalizar').attr("disabled", true); //deshabilito boton localizar
@@ -20,16 +20,49 @@ function localizar(){
     showConfirmButton: false,
     timer: 3000
     })
-    var mkii = L.icon.mapkey({icon:"school",color:'#725139',background:'#f2c357',size:40});
-    var radius = e.accuracy / 2;
-    L.marker(e.latlng,{icon:mkii}).addTo(map).bindPopup("<h5>Si tu ubicación esta bien presiona sobre el circulo, si no presiona afuera</h5>").openPopup();
-    var radio=L.circle(e.latlng,radius,{color:'green'});
-    radio.addTo(map);
-    radio.on('click',function(e){
-      $('#modalCliente').modal('show');
+    var mkii = L.icon.mapkey({icon:"smartphone",color:'#FFFFFF',background:'#69b777',size:70,opacity:0.8});
+    //var radius = e.accuracy / 2;
+    var icono = L.marker(e.latlng,{icon:mkii}).addTo(map).bindPopup("<h5>Si tu ubicación esta bien presiona sobre el circulo, si no presiona afuera</h5>").openPopup();
+    icono.addTo(map);
+    //var radio=L.circle(e.latlng,radius,{color:'#218838', border:'#218838'});
+    //radio.addTo(map);
+    icono.on('click',function(e){
+      //$('#modalCliente').modal('show');
+      //
+      Swal.mixin({
+  input: 'text',
+  backdrop:false,
+  confirmButtonText: 'Next &rarr;',
+  showCancelButton: true,
+  progressSteps: ['1', '2', '3']
+}).queue([
+  {
+    title: 'Question 1',
+    text: 'Chaining swal2 modals is easy'
+  },
+  'Question 2',
+  'Question 3'
+]).then((result) => {
+  if (result.value) {
+    const answers = JSON.stringify(result.value)
+    Swal.fire({
+      title: 'All done!',
+      backdrop:false,
+      html: `
+        Your answers:
+        <pre><code>${answers}</code></pre>
+      `,
+      confirmButtonText: 'Lovely!'
+    })
+  }
+})
+      //
     });
     map.on('click',function(e){
-      //
+      $('#botonLocalizar').attr("disabled", false);
+      //radio.remove(map);
+      icono.remove(map);
+
     });
   }
 
