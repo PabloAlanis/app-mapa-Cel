@@ -12,17 +12,17 @@ function localizar(){
   function onLocationFound(e) {
     $('#botonLocalizar').attr("disabled", true); //deshabilito boton localizar
     Swal.fire({
-    position: 'top-end',
+    //position: 'top-end',
     customClass:'swalModal',//busca en css
     icon: 'success',
     backdrop:false,
-    title: 'Hola, si es correcta la ubicacion presiona el circulo verde',
+    title: 'Hola, si es correcta tu ubicacion presiona el icono',
     showConfirmButton: false,
     timer: 3000
     })
     var mkii = L.icon.mapkey({icon:"smartphone",color:'#FFFFFF',background:'#69b777',size:70,opacity:0.8});
     //var radius = e.accuracy / 2;
-    var icono = L.marker(e.latlng,{icon:mkii}).addTo(map).bindPopup("<h5>Si tu ubicación esta bien presiona sobre el circulo, si no presiona afuera</h5>").openPopup();
+    var icono = L.marker(e.latlng,{icon:mkii}).addTo(map).bindPopup("<h5>Si es correcta tu ubicacion presioname, sino presiona el mapa</h5>").openPopup();
     icono.addTo(map);
     //var radio=L.circle(e.latlng,radius,{color:'#218838', border:'#218838'});
     //radio.addTo(map);
