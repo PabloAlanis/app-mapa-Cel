@@ -19,7 +19,7 @@
   "homepage": "https://github.com/PabloAlanis/app-mapa-Cel#readme",
   "dependencies": {
     "ejs-mate": "^3.0.0",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.24",
     "sweetalert2": "^9.15.3"
